@@ -1,5 +1,6 @@
 import os
 import urlparse
+from os import path
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -7,7 +8,9 @@ BASE_DIR = PACKAGE_ROOT
 
 SITE_ID = int(os.environ.get("SITE_ID", 1))
 DEBUG = SITE_ID == 1
+ 
 
+'''
 if "GONDOR_DATABASE_URL" in os.environ:
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["GONDOR_DATABASE_URL"])
@@ -30,7 +33,18 @@ else:
             "NAME": "ppb",
         }
     }
+'''
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': path.join(PROJECT_ROOT, 'db.sqlite3'),
+        'USER': 'leo',
+        'PASSWORD': 'xiaoxiaoleo',
+        'HOST': '',
+        'PORT': '',
+    }
+}
 
 ALLOWED_HOSTS = [
     "blog.pinaxproject.com"
